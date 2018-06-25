@@ -2,7 +2,81 @@
 
 This is a GraphiQL plugin for Sphinx that lets you make GraphQL queries from your docs.
 
+We built this for documenting our [graphql engine](https://hasura.io/) queries. Check it out in action [here](https://docs.hasura.io/0.15/graphql/manual/queries/nested-object-queries.html).
+
 ![example](https://raw.githubusercontent.com/hasura/sphinx_graphiql/master/assets/sphinx-graphiql-example.png)
+
+
+## Usage
+
+To insert a GraphiQL component inside your `.rst` doc, use the declarative:
+
+```
+.. graphiql::
+   :query:
+        query {
+            author(order_by: ["-name"]) {
+            		name
+            }
+        }
+```
+
+### Read only
+
+If you want to make GraphiQL read-only, you just have to add another option `:view_only:`. For example:
+
+```
+.. graphiql::
+   :view_only:
+   :query:
+        query {
+            author(order_by: ["-name"]) {
+            		name
+            }
+        }
+```
+
+### Template with a dummy response
+
+Sometimes you will want to show the response along with the query. You can do that by adding a `:response:` option. This is useful when you want syntax highlighting for GraphQL which is not yet supported by Sphinx.
+
+```
+.. graphiql::
+   :view_only: true
+   :query:
+        mutation insert_article {
+            insert_article (
+                objects: [
+                    {
+                        title: "Article 1",
+                        content: "Sample article content",
+                        author_id: 3
+                    }
+                ]
+            )
+            {
+                returning {
+                  id
+                  title
+                }
+            }
+        }
+   :response:
+        {
+            "data": {
+                "insert_article": {
+                    "affected_rows": 1,
+                    "returning": [
+                        {
+                          "id": 102,
+                          "title": "Article 1"
+                        }
+                    ]
+                }
+            }
+        }
+
+```
 
 ## Installation
 
@@ -106,75 +180,4 @@ const graphiQLElement = React.createElement(GraphiQL, {
   query: query,
   response: response
 });
-```
-
-## Usage
-
-To insert a GraphiQL component inside your `.rst` doc, use the declarative:
-
-```
-.. graphiql::
-   :query:
-        query {
-            author(order_by: ["-name"]) {
-            		name
-            }
-        }
-```
-
-### Read only
-
-If you want to make GraphiQL read-only, you just have to add another option `:view_only:`. For example:
-
-```
-.. graphiql::
-   :view_only:
-   :query:
-        query {
-            author(order_by: ["-name"]) {
-            		name
-            }
-        }
-```
-
-### Template with a dummy response
-
-Sometimes you will want to show the response along with the query. You can do that by adding a `:response:` option. This is useful when you want syntax highlighting for GraphQL which is not yet supported by Sphinx.
-
-```
-.. graphiql::
-   :view_only: true
-   :query:
-        mutation insert_article {
-            insert_article (
-                objects: [
-                    {
-                        title: "Article 1",
-                        content: "Sample article content",
-                        author_id: 3
-                    }
-                ]
-            )
-            {
-                returning {
-                  id
-                  title
-                }
-            }
-        }
-   :response:
-        {
-            "data": {
-                "insert_article": {
-                    "affected_rows": 1,
-                    "returning": [
-                        {
-                          "id": 102,
-                          "title": "Article 1"
-                        }
-                    ]
-                }
-            }
-        }
-
 ```
