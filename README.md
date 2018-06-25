@@ -96,7 +96,7 @@ extension.append('sphinx_graphiql')
 
 ### Step 3: Add appropriate scripts to your template HTML
 
-Just add the following tags inside the `<head></head>` of your template html file.
+Just add the following tags inside the `<head></head>` of your template html file (typically `layout.html`).
 
 ```html
 
