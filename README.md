@@ -80,13 +80,21 @@ Sometimes you will want to show the response along with the query. You can do th
 
 ## Installation
 
-### Install the plugin
+### Step 1: Install the plugin
 
 ```bash
 $ pip install sphinx_graphiql
 ```
 
-### Add appropriate scripts to your template HTML
+### Step 2: Mention the plugin as an extension in `conf.py`
+
+You might be using other extensions in your docs. Just append `sphinx_graphiql` to the list of extensions.
+
+```
+extension.append('sphinx_graphiql')
+```
+
+### Step 3: Add appropriate scripts to your template HTML
 
 Just add the following tags inside the `<head></head>` of your template html file.
 
