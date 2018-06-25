@@ -91,7 +91,7 @@ $ pip install sphinx_graphiql
 You might be using other extensions in your docs. Append `sphinx_graphiql` to the list of extensions.
 
 ```
-extension.append('sphinx_graphiql')
+extensions.append('sphinx_graphiql')
 ```
 
 ### Step 3: Add appropriate scripts to your template HTML
