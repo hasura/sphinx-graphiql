@@ -88,7 +88,7 @@ $ pip install sphinx_graphiql
 
 ### Add appropriate scripts to your template HTML
 
-Just add the following tags inside the `<head></head>` of your template html file.
+Just add the following tags inside the `<head></head>` of your template html file (typically `layout.html`).
 
 ```html
 
