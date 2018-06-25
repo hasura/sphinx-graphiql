@@ -2,7 +2,7 @@
 
 This is a GraphiQL plugin for Sphinx that lets you make GraphQL queries from your docs.
 
-We built this for documenting our [graphql engine](https://hasura.io/) queries. Check it out in action [here](https://docs.hasura.io/0.15/graphql/manual/queries/nested-object-queries.html).
+We built this for documenting [Hasura graphql engine's](https://hasura.io/) API. Check it out in action [here](https://docs.hasura.io/0.15/graphql/manual/queries/nested-object-queries.html).
 
 ![example](https://raw.githubusercontent.com/hasura/sphinx_graphiql/master/assets/sphinx-graphiql-example.png)
 
