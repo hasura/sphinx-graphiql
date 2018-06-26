@@ -146,7 +146,7 @@ Add the following tags inside the `<head></head>` of your template html file (ty
       const response = target.getElementsByClassName("response")[0].innerHTML.trim();
       const graphiQLElement = React.createElement(GraphiQL, {
         fetcher: graphQLFetcher(endpoint),
-        schema: null, // Introspects schema from endpoint by default. Pass schema if introspection not supported
+        schema: null, // Introspects schema from endpoint if not set. Pass schema if introspection not supported
         query: query,
         response: response
       });
@@ -184,7 +184,7 @@ If your GraphQL endpoint supports introspection, auto-completion will work out o
 
 const graphiQLElement = React.createElement(GraphiQL, {
   fetcher: graphQLFetcher(endpoint),
-  schema: schemaObj, // Required only if the endpoing does not support introspection
+  schema: schemaObj, // Required only if the endpoint does not support introspection
   query: query,
   response: response
 });
