@@ -1,22 +1,13 @@
-.graphiql-container .topBar {
-  background: #f7f7f7 !important;
-  border-top-left-radius: 3px !important;
-}
-
-.graphiql-container .docExplorerShow {
-  background: #f7f7f7 !important;
-  border-top-right-radius: 3px !important;
-}
-
 .graphiql {
   height: 300px;
   margin-bottom: 20px;
 }
 
 .graphiql .query, .graphiql .response {
-    display: none;
+  display: none;
 }
 
-.graphiql .variable-editor, .graphiql a[title="Show History"], .graphiql.view-only .execute-button {
+.graphiql.view-only .execute-button {
   display: none !important;
 }
+
