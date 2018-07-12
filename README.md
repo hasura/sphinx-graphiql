@@ -2,9 +2,9 @@
 
 This is a GraphiQL plugin for Sphinx that lets you make GraphQL queries from your docs.
 
-We built this for documenting [Hasura graphql engine's](https://hasura.io/) API. Check it out in action [here](https://docs.hasura.io/1.0/graphql/manual/queries/nested-object-queries.html).
+We built this for documenting [Hasura GraphQL engine](https://hasura.io/)'s API. Check it out in action [here](https://docs.hasura.io/1.0/graphql/manual/queries/simple-object-queries.html). *(Note: we have added custom css overrides to make GraphiQL look as per our needs)*
 
-![example](https://raw.githubusercontent.com/hasura/sphinx_graphiql/master/assets/sphinx-graphiql-example.png)
+![example](https://raw.githubusercontent.com/hasura/sphinx-graphiql/master/assets/sphinx-graphiql-example.png)
 
 
 ## Usage
@@ -15,66 +15,79 @@ To insert a GraphiQL component inside your `.rst` doc, use the declarative:
 .. graphiql::
    :query:
       query {
-         author(order_by: ["-name"]) {
+         author {
+            id
             name
          }
       }
 ```
 
-### Read only
+### View only
 
-If you want to make GraphiQL read-only, you just have to add another option `:view_only:`. For example:
+If you want to make GraphiQL view-only (ie: disable execution), you just have to add another option `:view_only:`. For example:
 
 ```
 .. graphiql::
    :view_only:
    :query:
       query {
-         author(order_by: ["-name"]) {
+         author {
+            id
             name
          }
       }
 ```
 
-### Template with a dummy response
+### Show a dummy response
 
-Sometimes you will want to show the response along with the query. You can do that by adding a `:response:` option. This is useful when you want syntax highlighting for GraphQL which is not yet supported by Sphinx.
+Sometimes you will want to show the response along with the query without executing it. You can do that by adding a `:response:` option.
 
 ```
 .. graphiql::
    :view_only: true
    :query:
-      mutation insert_article {
-         insert_article (
-            objects: [
-               {
-                  title: "Article 1",
-                  content: "Sample article content",
-                  author_id: 3
-               }
-            ]
-         ) {
-            returning {
-               id
-               title
-            }
+      query {
+         author {
+            id
+            name
          }
       }
    :response:
       {
          "data": {
-            "insert_article": {
-               "affected_rows": 1,
-               "returning": [
-                  {
-                     "id": 101,
-                     "title": "Article 1"
-                  }
-               ]
-            }
+            "author": [
+               {
+                  "id": 1
+                  "name": "Justin",
+               },
+               {
+                  "id": 2
+                  "name": "Beltran",
+               },
+               {
+                  "id": 3
+                  "name": "Sidney",
+               }
+           ]
+        }
+     }
+```
+
+### Custom endpoint
+
+By default, the GraphQL endpoint is picked up from an environment variable as described [here](#default-graphql-endpoint). 
+In case you want to explicitly set an endpoint for a query, you can do so by adding an `:endpoint:` option.
+
+```
+.. graphiql::
+   :endpoint: http://localhost:8080/v1/graphql
+   :query:
+      query {
+         author {
+            id
+            name
          }
       }
-
 ```
 
 ## Installation
@@ -93,7 +106,7 @@ You might be using other extensions in your docs. Append `sphinx_graphiql` to th
 extensions.append('sphinx_graphiql')
 ```
 
-### Step 3: Add appropriate scripts to your template HTML
+### Step 3: Add the required scripts to your template HTML
 
 Add the following tags inside the `<head></head>` of your template html file (typically `layout.html`).
 
@@ -147,7 +160,7 @@ Add the following tags inside the `<head></head>` of your template html file (ty
       const response = target.getElementsByClassName("response")[0].innerHTML.trim();
       const graphiQLElement = React.createElement(GraphiQL, {
         fetcher: graphQLFetcher(endpoint),
-        schema: undefined, // the schema will be fetched using introspection. Pass null if there is no schema to be set
+        schema: null, // TODO: Pass undefined to fetch schema via introspection
         query: query,
         response: response
       });
@@ -166,21 +179,22 @@ Add the following tags inside the `<head></head>` of your template html file (ty
 
 ## Configuration
 
-### GraphQL Endpoint
+### Default GraphQL Endpoint
 
 You have to set the GraphQL endpoint as an environment variable in your sphinx configuration file (typically `conf.py` at the root your your project).
 
 For example:
 
 ```python
-GRAPHIQL_DEFAULT_ENDPOINT = "https://graphql.accountat35.hasura-app.io/v1alpha1/graphql"
+GRAPHIQL_DEFAULT_ENDPOINT = "https://graphql.my-graphql-app.io/v1/graphql"
 ```
 
 ### Auto-completion
 
 GraphiQL uses the GraphQL schema to auto complete as you type in queries and mutations.
 
-If your GraphQL endpoint supports introspection, auto-completion will work out of the box.
+If your GraphQL endpoint supports introspection, just pass `undefined` as the schema variable and 
+auto-completion will work out of the box.
 
 ```js
 

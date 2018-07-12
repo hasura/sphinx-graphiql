@@ -1,10 +1,10 @@
+<!-- GraphiQL -->
 <script src="//cdn.jsdelivr.net/react/15.4.2/react.min.js"></script>
 <script src="//cdn.jsdelivr.net/react/15.4.2/react-dom.min.js"></script>
 <script src="https://rawgit.com/hasura/sphinx_graphiql/master/static/graphiql/graphiql.min.js"></script>
 <link href="https://rawgit.com/hasura/sphinx_graphiql/master/static/graphiql/graphiql.css" rel="stylesheet">
 <link href="https://rawgit.com/hasura/sphinx_graphiql/master/static/styles.css" rel="stylesheet">
 <script type="text/javascript">
-  // graphiql
   // graphql query fetcher
   const graphQLFetcher = function(endpoint) {
     endpoint = endpoint || "{{ GRAPHIQL_DEFAULT_ENDPOINT }}";
@@ -44,14 +44,14 @@
       const response = target.getElementsByClassName("response")[0].innerHTML.trim();
       const graphiQLElement = React.createElement(GraphiQL, {
         fetcher: graphQLFetcher(endpoint),
-        schema: null, // TODO: pass actual schema
+        schema: null, // TODO: Pass undefined to fetch schema via introspection
         query: query,
         response: response
       });
       ReactDOM.render(graphiQLElement, target);
     }
   };
-  // if graphiql elements present, load react/graphiql js files and setup graphiql
+  // if graphiql elements present, setup graphiql
   if (document.getElementsByClassName('graphiql').length > 0) {
     setupGraphiQL();
   }
