@@ -2,7 +2,7 @@
 
 This is a GraphiQL plugin for Sphinx that lets you make GraphQL queries from your docs.
 
-We built this for documenting [Hasura GraphQL engine](https://hasura.io/)'s API. Check it out in action [here](https://docs.hasura.io/1.0/graphql/manual/queries/simple-object-queries.html). *(Note: we have added custom css overrides to make GraphiQL look as per our needs)*
+We built this for documenting [Hasura GraphQL engine](https://hasura.io/)'s API. Check it out in action [here](https://docs.hasura.io/1.0/graphql/manual/queries/simple-object-queries.html). *(Note: In our docs we have added custom css overrides to make GraphiQL look as per our needs)*
 
 ![example](https://raw.githubusercontent.com/hasura/sphinx-graphiql/master/assets/sphinx-graphiql-example.png)
 
