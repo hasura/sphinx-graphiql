@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="sphinx_graphiql",
-    version="0.0.1",
+    version="0.0.2",
     author="Rikin K",
     author_email="rikin@hasura.io",
     description="Sphinx extension for GraphiQL",
