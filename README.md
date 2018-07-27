@@ -28,7 +28,7 @@ If you want to make GraphiQL view-only (ie: disable execution), you just have to
 
 ```
 .. graphiql::
-   :view_only: true
+   :view_only:
    :query:
       query {
          author {
@@ -44,7 +44,7 @@ Sometimes you will want to show the response along with the query without execut
 
 ```
 .. graphiql::
-   :view_only: true
+   :view_only:
    :query:
       query {
          author {
