@@ -11,7 +11,7 @@ We built this for documenting [Hasura GraphQL engine](https://hasura.io/)'s API.
 
 To insert a GraphiQL component inside your `.rst` doc, use the declarative:
 
-```
+```rst
 .. graphiql::
    :query:
       query {
@@ -26,7 +26,7 @@ To insert a GraphiQL component inside your `.rst` doc, use the declarative:
 
 If you want to make GraphiQL view-only (ie: disable execution), you just have to add another option `:view_only:`. For example:
 
-```
+```rst
 .. graphiql::
    :view_only:
    :query:
@@ -42,7 +42,7 @@ If you want to make GraphiQL view-only (ie: disable execution), you just have to
 
 Sometimes you will want to show the response along with the query without executing it. You can do that by adding a `:response:` option.
 
-```
+```rst
 .. graphiql::
    :view_only:
    :query:
@@ -78,7 +78,7 @@ Sometimes you will want to show the response along with the query without execut
 By default, the GraphQL endpoint is picked up from an environment variable as described [here](#default-graphql-endpoint). 
 In case you want to explicitly set an endpoint for a query, you can do so by adding an `:endpoint:` option.
 
-```
+```rst
 .. graphiql::
    :endpoint: http://localhost:8080/v1/graphql
    :query:
