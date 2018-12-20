@@ -1,7 +1,7 @@
 import fett
 from docutils import statemachine
+from docutils.parsers.rst import Directive
 from docutils.utils.error_reporting import ErrorString
-from sphinx.util.compat import Directive
 
 
 class SphinxGraphiQL(Directive):
