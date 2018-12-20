@@ -1,6 +1,6 @@
-import fett
 from docutils import statemachine
 from docutils.utils.error_reporting import ErrorString
+import jinja2
 from sphinx.util.compat import Directive
 
 
@@ -14,7 +14,7 @@ class SphinxGraphiQL(Directive):
     GRAPHIQL_TEMPLATE = '''
 .. raw:: html
 
-   <div class="graphiql {{ if view_only }}view-only{{end}}">
+   <div class="graphiql {% if view_only %}view-only{% endif %}">
    Loading...
    <div class="endpoint">
    {{ endpoint }}
@@ -29,7 +29,7 @@ class SphinxGraphiQL(Directive):
 '''
 
     def run(self):
-        raw_template = fett.Template(self.GRAPHIQL_TEMPLATE)
+        raw_template = jinja2.Template(self.GRAPHIQL_TEMPLATE)
         try:
             rendered_template = raw_template.render(self.options)
         except Exception as error:
