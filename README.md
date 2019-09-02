@@ -2,10 +2,6 @@
 
 This is a GraphiQL plugin for Sphinx that lets you make GraphQL queries from your docs.
 
-We built this for documenting [Hasura GraphQL engine](https://hasura.io/)'s API. Check it out in action [here](https://docs.hasura.io/1.0/graphql/manual/queries/simple-object-queries.html). *(Note: In our docs we have added custom css overrides to make GraphiQL look as per our needs)*
-
-![example](https://raw.githubusercontent.com/hasura/sphinx-graphiql/master/assets/sphinx-graphiql-example.png)
-
 
 ## Usage
 
@@ -115,9 +111,9 @@ Add the following tags inside the `<head></head>` of your template html file (ty
 <!-- GraphiQL -->
 <script src="//cdn.jsdelivr.net/react/15.4.2/react.min.js"></script>
 <script src="//cdn.jsdelivr.net/react/15.4.2/react-dom.min.js"></script>
-<script src="https://rawgit.com/hasura/sphinx_graphiql/master/static/graphiql/graphiql.min.js"></script>
-<link href="https://rawgit.com/hasura/sphinx_graphiql/master/static/graphiql/graphiql.css" rel="stylesheet">
-<link href="https://rawgit.com/hasura/sphinx_graphiql/master/static/styles.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/jazzyray/sphinx-graphiql@master/static/graphiql/graphiql.min.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/jazzyray/sphinx-graphiql@master/static/graphiql/graphiql.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/jazzyray/sphinx-graphiql@master/static/styles.css" rel="stylesheet">
 <script type="text/javascript">
   // graphql query fetcher
   const graphQLFetcher = function(endpoint) {

@@ -1,4 +1,4 @@
-from sphinx_graphiql import SphinxGraphiQL
+from .sphinx_graphiql import SphinxGraphiQL
 
 def setup(app):
     app.add_directive('graphiql', SphinxGraphiQL)

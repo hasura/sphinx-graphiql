@@ -1,7 +1,8 @@
 import fett
 from docutils import statemachine
 from docutils.utils.error_reporting import ErrorString
-from sphinx.util.compat import Directive
+from docutils import nodes
+from docutils.parsers.rst import Directive
 
 
 class SphinxGraphiQL(Directive):
@@ -40,4 +41,3 @@ class SphinxGraphiQL(Directive):
         self.state_machine.insert_input(rendered_lines, '')
 
         return []
-

@@ -6,12 +6,12 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="sphinx_graphiql",
     version="0.0.3",
-    author="Rikin K",
-    author_email="rikin@hasura.io",
-    description="Sphinx extension for GraphiQL",
+    author="Jem Rayfield",
+    author_email="jem.rayfield@ontotext.com",
+    description="Sphinx extension for GraphiQL, from Hasura, patched for Ontotext",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/hasura/sphinx_graphiql",
+    url="https://github.com/jazzyray/sphinx-graphiql",
     packages=setuptools.find_packages(),
     classifiers=(
         "Programming Language :: Python :: 2.7",
@@ -19,3 +19,19 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ),
 )
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+           
