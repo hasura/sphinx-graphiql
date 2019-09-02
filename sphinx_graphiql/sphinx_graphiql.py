@@ -15,7 +15,7 @@ class SphinxGraphiQL(Directive):
     GRAPHIQL_TEMPLATE = '''
 .. raw:: html
 
-   <div class="graphiql {{ if view_only }}view-only{{end}}">
+   <div class="graphiql{{ if view_only }}view-only{{end}}">
    Loading...
    <div class="endpoint">
    {{ endpoint }}
