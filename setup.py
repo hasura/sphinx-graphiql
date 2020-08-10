@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="ontotext_sphinx_graphiql",
-    version="0.0.4",
+    name="ontotext-sphinx-graphiql",
+    version="0.0.7",
     author="Jem Rayfield",
     author_email="jem.rayfield@ontotext.com",
     description="Sphinx extension for GraphiQL, from Hasura, patched for Ontotext",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/jazzyray/sphinx-graphiql",
+    url="https://gitlab.ontotext.com/platform/sphinx-graphiql",
     packages=setuptools.find_packages(),
     classifiers=(
         "Programming Language :: Python :: 2.7",

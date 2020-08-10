@@ -1,8 +1,8 @@
 README.md
 setup.py
+ontotext_sphinx_graphiql/__init__.py
+ontotext_sphinx_graphiql/ontotext_sphinx_graphiql.py
 ontotext_sphinx_graphiql.egg-info/PKG-INFO
 ontotext_sphinx_graphiql.egg-info/SOURCES.txt
 ontotext_sphinx_graphiql.egg-info/dependency_links.txt
 ontotext_sphinx_graphiql.egg-info/top_level.txt
-sphinx_graphiql/__init__.py
-sphinx_graphiql/sphinx_graphiql.py

@@ -14,6 +14,7 @@ class SphinxGraphiQL(Directive):
                     "response": str, 
                     "endpoint": str, 
                     "view_only": str,
+                    "token": str,
                     }
 
     GRAPHIQL_TEMPLATE = '''
@@ -37,6 +38,7 @@ class SphinxGraphiQL(Directive):
    {{ response }}
    </div>
    </div>
+   
 '''
 
     def run(self):

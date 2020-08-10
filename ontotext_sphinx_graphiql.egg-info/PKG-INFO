@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
 Name: ontotext-sphinx-graphiql
-Version: 0.0.4
+Version: 0.0.7
 Summary: Sphinx extension for GraphiQL, from Hasura, patched for Ontotext
-Home-page: https://github.com/jazzyray/sphinx-graphiql
+Home-page: https://gitlab.ontotext.com/platform/sphinx-graphiql
 Author: Jem Rayfield
 Author-email: jem.rayfield@ontotext.com
 License: UNKNOWN
@@ -14,19 +14,32 @@ Description: # Sphinx GraphiQL
         ## Build
         
         ```bash
-        python3 setup.py sdist bdist_wheel
+        python3 setup.py sdist
         ```
         
         ## Publish
         
-        Make sure you have install twine
+        Make sure you have installed twine
         
         ```bash
+        python3 -m pip install --user --upgrade twine
+        ```
         
+        Make suer you have a ~/.pypirc config setup
+        
+        ```bash
+        [distutils]
+         index-servers =
+           nexus
+         
+         [nexus]
+         repository: http://docker-registry.ontotext.com/repository/pypi-repo/
+         username: kim-user
+         password: ************
         ```
         
         ```bash
-        twine upload -r pypi dist/apollo-federation-gateway-acceptance-0.0.1.tar.gz --verbose  
+        twine upload -r nexus dist/ontotext_sphinx_graphiql-0.0.4.tar.gz --verbose  
         ```
         
         ## Usage
