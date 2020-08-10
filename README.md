@@ -3,6 +3,37 @@
 This is a GraphiQL plugin for Sphinx that lets you make GraphQL queries from your docs.
 
 
+## Build
+
+```bash
+python3 setup.py sdist
+```
+
+## Publish
+
+Make sure you have installed twine
+
+```bash
+python3 -m pip install --user --upgrade twine
+```
+
+Make suer you have a ~/.pypirc config setup
+
+```bash
+[distutils]
+ index-servers =
+   nexus
+ 
+ [nexus]
+ repository: http://docker-registry.ontotext.com/repository/pypi-repo/
+ username: kim-user
+ password: ************
+```
+
+```bash
+twine upload -r nexus dist/ontotext_sphinx_graphiql-0.0.4.tar.gz --verbose  
+```
+
 ## Usage
 
 To insert a GraphiQL component inside your `.rst` doc, use the declarative:
@@ -86,6 +117,23 @@ In case you want to explicitly set an endpoint for a query, you can do so by add
       }
 ```
 
+### JWT Token
+
+It is possible to add a JWT token to the Authorization header used within GraphQL requests
+from the GraphiQL widget
+
+```rst
+.. graphiql::
+   :token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlFCcFNNSzJNdENTck0zS3FxWERnTWhNMVhVY0V3ZDNLIn0.eyJhdWQiOiI2NzJjYTdiMy1jMzcyLTRkZjMtODJkOC05YTFhMGQ3ZDY4YzEiLCJleHAiOjE2NTA1OTUwNzksImlhdCI6MTU4NzQ4MTE3NSwiaXNzIjoic3dhcGktcGxhdGZvcm0ub250b3RleHQuY29tIiwic3ViIjoiNDAwZmNjODAtZGZhZS00NmQ3LWFiNWMtNjQ1NzQ3OTk4MWRmIiwiYXV0aGVudGljYXRpb25UeXBlIjoiUEFTU1dPUkQiLCJlbWFpbCI6ImRyb2lkaHV0dHJlYWRAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiZHJvaWRodXR0cmVhZCIsImFwcGxpY2F0aW9uSWQiOiI2NzJjYTdiMy1jMzcyLTRkZjMtODJkOC05YTFhMGQ3ZDY4YzEiLCJyb2xlcyI6WyJEcm9pZEh1dHRSZWFkIiwiU2NoZW1hUkJBQ0FkbWluIl19.GO1PYegUgc1u79l2jBK1_fqK-jcxDLxjo8A2F7IH-qE
+   :query:
+      query {
+         author {
+            id
+            name
+         }
+      }
+```
+
 ## Installation
 
 ### Step 1: Install the plugin
@@ -109,24 +157,27 @@ Add the following tags inside the `<head></head>` of your template html file (ty
 ```html
 
 <!-- GraphiQL -->
-<script src="//cdn.jsdelivr.net/react/15.4.2/react.min.js"></script>
-<script src="//cdn.jsdelivr.net/react/15.4.2/react-dom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/react/15.4.2/react.min.js"></script>
+<script src="https://cdn.jsdelivr.net/react/15.4.2/react-dom.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/jazzyray/sphinx-graphiql@master/static/graphiql/graphiql.min.js"></script>
 <link href="https://cdn.jsdelivr.net/gh/jazzyray/sphinx-graphiql@master/static/graphiql/graphiql.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/jazzyray/sphinx-graphiql@master/static/styles.css" rel="stylesheet">
 <script type="text/javascript">
   // graphql query fetcher
-  const graphQLFetcher = function(endpoint) {
-    endpoint = endpoint || "{{ GRAPHIQL_DEFAULT_ENDPOINT }}";
+  const graphQLFetcher = function(endpoint, token, insecure) {
+    endpoint = endpoint || "https://swapi-platform.ontotext.com/graphql";
+    insecure = insecure || false
     return function(graphQLParams) {
       const params = {
         method: 'post',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(graphQLParams),
-        credentials: 'include'
+        credentials: 'include',
+        insecure: true,
       };
       return fetch(endpoint, params)
         .then(function (response) {
@@ -141,24 +192,25 @@ Add the following tags inside the `<head></head>` of your template html file (ty
         });
     }
   };
-   
   // create GraphiQL components and embed into HTML
   const setupGraphiQL = function() {
     if (typeof(React) === 'undefined' || typeof(ReactDOM) === 'undefined' || typeof(GraphiQL) === 'undefined') {
       return;
     }
-   
     const targets = document.getElementsByClassName('graphiql');
     for (let i = 0; i < targets.length; i++) {
       const target = targets[i];
       const endpoint = target.getElementsByClassName("endpoint")[0].innerHTML.trim();
+      const token = target.getElementsByClassName("token")[0].innerHTML.trim();
+      const insecure = target.getElementsByClassName("insecure")[0].innerHTML.trim();
       const query = target.getElementsByClassName("query")[0].innerHTML.trim();
       const response = target.getElementsByClassName("response")[0].innerHTML.trim();
       const graphiQLElement = React.createElement(GraphiQL, {
-        fetcher: graphQLFetcher(endpoint),
-        schema: null, // TODO: Pass undefined to fetch schema via introspection
+        fetcher: graphQLFetcher(endpoint, token, insecure),
+        schema: undefined,
         query: query,
-        response: response
+        response: response,
+        token: token
       });
       ReactDOM.render(graphiQLElement, target);
     }

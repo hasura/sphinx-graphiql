@@ -10,7 +10,11 @@ class SphinxGraphiQL(Directive):
     required_arguments = 0
     optional_arguments = 0
     final_argument_whitespace = True
-    option_spec = {"query": str, "response": str, "endpoint": str, "view_only": str}
+    option_spec = {"query": str, 
+                    "response": str, 
+                    "endpoint": str, 
+                    "view_only": str,
+                    }
 
     GRAPHIQL_TEMPLATE = '''
 .. raw:: html
@@ -20,9 +24,15 @@ class SphinxGraphiQL(Directive):
    <div class="endpoint">
    {{ endpoint }}
    </div>
+   <div class="token">
+   {{ token }}
+   </div>
+   <div class="insecure">true</div>
+   <pre>
    <div class="query">
    {{ query }}
    </div>
+   </pre>
    <div class="response">
    {{ response }}
    </div>

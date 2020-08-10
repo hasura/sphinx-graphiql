@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="sphinx_graphiql",
-    version="0.0.3",
+    name="ontotext_sphinx_graphiql",
+    version="0.0.4",
     author="Jem Rayfield",
     author_email="jem.rayfield@ontotext.com",
     description="Sphinx extension for GraphiQL, from Hasura, patched for Ontotext",
@@ -19,19 +19,4 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ),
 )
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-           
+         
